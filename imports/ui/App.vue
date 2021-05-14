@@ -1,26 +1,37 @@
 <template>
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <hello/>
-    <info/>
+  <div id="app">
+    <div class="content">
+      <div class="top-bar">
+        <navbar />
+      </div>
+      <div class="page-content">
+        <home />
+      </div>
+      <div class="footer-content">
+        <footer-section />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello.vue'
-import Info from './components/Info.vue'
+import Navbar from "./components/Navbar.vue";
+import Home from "./components/Home.vue";
+import FooterSection from './components/FooterSection.vue';
+
 
 export default {
   components: {
-    Hello,
-    Info,
+    Navbar,
+    Home,
+    FooterSection,
   },
-}
+};
 </script>
 
 <style>
-  body {
-    font-family: sans-serif;
-    padding: 10px;
-  }
+body {
+  font-family: sans-serif;
+  padding: 10px;
+}
 </style>
