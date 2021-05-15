@@ -1,13 +1,18 @@
 <template>
-  <div class= "container col" style="height:100%">
-      <div class="row">
-        <div class="home-content h-100 col-xs-12 col-sm-12 col-md-12 full-height" :style="image">
+  <div class="container-fluid m-0 p-0">
+    <div
+      class="home-content d-flex justify-content-center align-items-center"
+      :style="image"
+    >
+      <div class="text-background w-50 mt-5 p-4">
+        <div class="home-content-text text-white text-center">
           <h3>Slow down, just breathe.</h3>
           <h5>
             We are here to help you break the tension during your work hours.
           </h5>
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -27,6 +32,14 @@ export default {
 </script>
 
 <style scoped>
+.home-content {
+  height: 100vh;
+  overflow-x: hidden;
+}
+.text-background {
+  background-color: var(--blue-trans);
+}
+
 p {
   font-family: serif;
 }

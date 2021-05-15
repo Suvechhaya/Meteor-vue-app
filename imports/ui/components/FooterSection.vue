@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid tbg-light">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
         <ul class="list-unstyled list-inline social text-center">
@@ -24,7 +24,7 @@
     </div>
     <div class="row">
       <div
-        class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-black"
+        class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 mb-3 mb-sm-3 text-center text-white"
       >
         <p>
           <u><a href="#">Breathe Meditation app</a></u>
@@ -53,6 +53,19 @@ export default {
 
 <style scoped>
 p {
-  font-family: serif;
+  font-size: 14px;
+}
+i{
+  font-size: 1.4em;
+  color: white;
+}
+.tbg-light {
+  background-color: var(--blue-md);
+}
+a {
+  color: white;
+}
+a:hover{
+  color: #FFD3A2;
 }
 </style>
