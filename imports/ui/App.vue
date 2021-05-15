@@ -17,8 +17,7 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import Home from "./components/Home.vue";
-import FooterSection from './components/FooterSection.vue';
-
+import FooterSection from "./components/FooterSection.vue";
 
 export default {
   components: {
@@ -30,8 +29,24 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Satisfy&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+/* FONTS */
+/* font-family: 'Roboto', sans-serif;
+font-family: 'Satisfy', cursive; */
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
-  font-family: sans-serif;
-  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  
+}
+:root {
+  --blue: rgb(11, 57, 84);
+  --blue-md:rgb(19, 78, 148);
+  --blue-trans: rgba(11, 57, 84,0.4);
+
 }
 </style>
