@@ -39,11 +39,4 @@ export default {
 .text-background {
   background-color: var(--blue-trans);
 }
-
-p {
-  font-family: serif;
-}
-header {
-  font-family: serif;
-}
 </style>
