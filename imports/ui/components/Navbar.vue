@@ -20,18 +20,27 @@
         <div class="navbar ml-auto">
           <ul class="navbar-nav">
             <li class="nav-item active pr-4">
-              <a class="nav-link text-white" href="#"
-                >HOME <span class="sr-only">(current)</span></a
-              >
+              <router-link to="/">
+                <a class="nav-link text-white"
+                  >HOME <span class="sr-only">(current)</span></a
+                >
+              </router-link>
             </li>
             <li class="nav-item pr-4">
-              <a class="nav-link text-white" href="#">ABOUT</a>
+              <router-link to="/about">
+                <a class="nav-link text-white">ABOUT</a>
+              </router-link>
             </li>
             <li class="nav-item pr-4">
-              <a class="nav-link text-white" href="#">LOGIN</a>
+              <router-link to="/login">
+                <a class="nav-link text-white">LOGIN</a>
+              </router-link>
             </li>
             <li>
-              <button class="btn btn-outline-light text-white my-2 my-sm-0">
+              <button
+                @click="signUp"
+                class="btn btn-outline-light text-white my-2 my-sm-0"
+              >
                 SIGN UP
               </button>
             </li>
@@ -45,18 +54,30 @@
 <script>
 export default {
   name: "Navbar",
+
+  methods: {
+    signUp() {
+      // this.$router.push('/signup').catch(()=>{});
+      this.$router.push("/signup").catch((err) => {
+        // Ignore the vuex err regarding  navigating to the page they are already on.
+        if (
+          err.name !== "NavigationDuplicated" &&
+          !err.message.includes(
+            "Avoided redundant navigation to current location"
+          )
+        ) {
+          // But print any other errors to the console
+          logError(err);
+        }
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .logo-name {
   font-family: "Satisfy", cursive;
-}
-p {
-  font-family: serif;
-}
-header {
-  font-family: serif;
 }
 .tbg-light {
   background-color: var(--blue-trans);
