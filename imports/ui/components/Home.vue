@@ -1,5 +1,8 @@
 <template>
   <div class="container-fluid m-0 p-0">
+    <div class="top-bar">
+      <navbar />
+    </div>
     <div
       class="home-content d-flex justify-content-center align-items-center"
       :style="image"
@@ -13,15 +16,24 @@
         </div>
       </div>
     </div>
+    <div class="footer-content">
+      <footer-section />
+    </div>
   </div>
 </template>
 
 <script>
+import Navbar from "./Navbar";
+import FooterSection from "./FooterSection";
+
 export default {
   name: "Home",
+  components: {
+    Navbar,
+    FooterSection,
+  },
   data() {
     return {
-      title: "Home",
       image: {
         backgroundImage:
           "url(https://www.10wallpaper.com/wallpaper/1366x768/1811/Austria_Plansee_Lake_HD_Nature_Scenery_Photo_1366x768.jpg)",
@@ -34,7 +46,6 @@ export default {
 <style scoped>
 .home-content {
   height: 100vh;
-  overflow-x: hidden;
 }
 .text-background {
   background-color: var(--blue-trans);
