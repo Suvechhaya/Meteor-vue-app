@@ -1,27 +1,13 @@
 <template>
   <div id="app">
     <div class="content">
-      <div class="top-bar">
-        <navbar />
-      </div>
       <router-view> </router-view>
-      <div class="footer-content">
-        <footer-section />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-import FooterSection from "./components/FooterSection.vue";
-
-export default {
-  components: {
-    Navbar,
-    FooterSection,
-  },
-};
+export default {};
 </script>
 
 <style>
@@ -40,6 +26,7 @@ body {
 }
 :root {
   --blue: rgb(11, 57, 84);
+  --blue-d: rgb(16, 65, 121);
   --blue-md: rgb(19, 78, 148);
   --blue-trans: rgba(11, 57, 84, 0.4);
 }
