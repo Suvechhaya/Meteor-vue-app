@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div data-spy="scroll" data-target=".navbar" data-offset="50">
     <nav class="navbar navbar-expand-lg tbg-light fixed-top">
-      <a class="navbar-brand text-white logo-name" href="#"><h4>Breathe</h4></a>
+      <a class="navbar-brand text-white logo-name" href="#home"><h4>Mindful Breath</h4></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -19,17 +19,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar ml-auto">
           <ul class="navbar-nav">
-            <li class="nav-item active pr-4">
-              <router-link to="/">
-                <a class="nav-link text-white"
+            <li class="nav-item pr-4">
+                <a class="nav-link text-white" href="#home"
                   >HOME <span class="sr-only">(current)</span></a
                 >
-              </router-link>
             </li>
             <li class="nav-item pr-4">
-              <router-link to="/about">
-                <a class="nav-link text-white">ABOUT</a>
-              </router-link>
+                <a class="nav-link text-white" href="#about">ABOUT</a>
             </li>
             <li class="nav-item pr-4">
               <router-link to="/login">
@@ -57,16 +53,14 @@ export default {
 
   methods: {
     signUp() {
-      // this.$router.push('/signup').catch(()=>{});
       this.$router.push("/signup").catch((err) => {
-        // Ignore the vuex err regarding  navigating to the page they are already on.
+        // Print other errors to the console except the vuex err regarding  navigating to the page they are already on.
         if (
           err.name !== "NavigationDuplicated" &&
           !err.message.includes(
             "Avoided redundant navigation to current location"
           )
         ) {
-          // But print any other errors to the console
           logError(err);
         }
       });
@@ -83,7 +77,7 @@ export default {
   background-color: var(--blue-trans);
 }
 .btn-outline-light:hover {
-  background: var(--blue);
+  background: var(--blue-md);
   border: none;
 }
 .navbar-nav a:hover {

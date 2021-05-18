@@ -4,7 +4,7 @@
       <navbar />
     </div>
     <div
-      class="home-content d-flex justify-content-center align-items-center"
+      class="home-content d-flex justify-content-center align-items-center" id="home"
       :style="image"
     >
       <div class="text-background w-50 mt-5 p-4">
@@ -16,6 +16,9 @@
         </div>
       </div>
     </div>
+    <div class="about-content">
+      <about />
+    </div>
     <div class="footer-content">
       <footer-section />
     </div>
@@ -25,11 +28,13 @@
 <script>
 import Navbar from "./Navbar";
 import FooterSection from "./FooterSection";
+import About from "./About";
 
 export default {
   name: "Home",
   components: {
     Navbar,
+    About,
     FooterSection,
   },
   data() {
@@ -46,6 +51,7 @@ export default {
 <style scoped>
 .home-content {
   height: 100vh;
+  overflow-x: hidden;
 }
 .text-background {
   background-color: var(--blue-trans);
