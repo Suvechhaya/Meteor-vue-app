@@ -1,105 +1,126 @@
 <template>
-  <div>
-    <div class="signup-form">
-      <form action="/examples/actions/confirmation.php" method="post">
-        <div class="close-btn mb-4">
-          <button @click="home" type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="class form-header text-center">
-          <h2>Sign Up</h2>
-          <p>Please fill in this form to create an account!</p>
-        </div>
-        <hr />
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <span class="fa fa-user"></span>
-              </span>
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              name="username"
-              placeholder="Username"
-              required="required"
-            />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fa fa-envelope"></i>
-              </span>
-            </div>
-            <input
-              type="email"
-              class="form-control"
-              name="email"
-              placeholder="Email Address"
-              required="required"
-            />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fa fa-lock"></i>
-              </span>
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              name="password"
-              placeholder="Password"
-              required="required"
-            />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">
-                <i class="fa fa-lock"></i>
-                <i class="fa fa-check"></i>
-              </span>
-            </div>
-            <input
-              type="text"
-              class="form-control"
-              name="confirm_password"
-              placeholder="Confirm Password"
-              required="required"
-            />
-          </div>
-        </div>
-        <div class="sign-up-button d-flex justify-content-center">
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">
-              Sign Up
-            </button>
-          </div>
-        </div>
-      </form>
-      <div class="text-center">
-        Already have an account?
-        <router-link to="/login"><a href="#">Login here</a></router-link>
+  <div class="signup-form">
+    <form @submit.prevent="userRegister">
+      <div class="close-btn mb-4">
+        <button @click="home" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="class form-header text-center">
+        <h2>Sign Up</h2>
+        <p>Please fill in this form to create an account!</p>
+      </div>
+      <hr />
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <span class="fa fa-envelope"></span>
+            </span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            name="email"
+            placeholder="Email"
+            required="required"
+            v-model="email"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="Password"
+            required="required"
+            v-model="password"
+          />
+        </div>
+        <div v-if="passwordLengthCheck()" class="error-msg p-1">
+          <span>Password must be at least 8 characters!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-lock"></i>
+              <i class="fa fa-check"></i>
+            </span>
+          </div>
+          <input
+            type="password"
+            class="form-control"
+            name="confirm_password"
+            placeholder="Confirm Password"
+            required="required"
+            v-model="repassword"
+          />
+        </div>
+        <div v-if="passwordConfirm()" class="error-msg p-1">
+          <span>Password mismatched!</span>
+        </div>
+      </div>
+      <div class="sign-up-button d-flex justify-content-center">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+        </div>
+      </div>
+    </form>
+    <div class="text-center">
+      Already have an account?
+      <router-link to="/login"><a>Login here</a></router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { Accounts } from "meteor/accounts-base";
+
 export default {
   name: "Signup",
-
+  data() {
+    return { email: "", password: "", repassword: "" };
+  },
   methods: {
     home() {
       this.$router.push("/");
+    },
+    passwordLengthCheck() {
+      if (this.password) {
+        if (this.password.length >= 8) {
+          passwordLength = true;
+          return false;
+        }
+        return true;
+      } else passwordLength = false;
+    },
+    passwordConfirm() {
+      if (this.repassword) {
+        if (this.password === this.repassword) {
+          passwordMatch = true;
+          return false;
+        }
+        return true;
+      }
+    },
+    userRegister() {
+      const doc = { email: this.email, password: this.password };
+      // if (this.passwordLength && this.passwordMatch) {
+        Accounts.createUser(doc, (err) => {
+          if (!err) {
+            alert("Sign up successful");
+            this.$router.push("/login");
+          } else alert("Sign up unsuccessful");
+        });
     },
   },
 };
@@ -177,5 +198,11 @@ export default {
   top: 18px;
   font-size: 7px;
   position: absolute;
+}
+.signup-form .error-msg span {
+  color: red;
+  float: left;
+  font-size: 12px;
+  padding-left: 15%;
 }
 </style>
