@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid tbg-light">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+      <div class="col-12 mt-4 mt-sm-5">
         <ul class="list-unstyled list-inline social text-center">
           <li class="list-inline-item">
             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -24,7 +24,7 @@
     </div>
     <div class="row">
       <div
-        class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 mb-3 mb-sm-3 text-center text-white"
+        class="col-12 mt-2 mb-3 text-center text-white"
       >
         <p>
           <u><a href="#">Breathe Meditation app</a></u>
