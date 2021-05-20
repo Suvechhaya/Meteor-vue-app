@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form @submit.prevent="userLogin">
       <div class="close-btn mb-4">
         <button @click="home" type="button" class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -14,15 +14,16 @@
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">
-              <span class="fa fa-user"></span>
+              <span class="fa fa-envelope"></span>
             </span>
           </div>
           <input
             type="text"
             class="form-control"
-            name="username"
-            placeholder="Username"
+            name="email"
+            placeholder="Email"
             required="required"
+            v-model="email"
           />
         </div>
       </div>
@@ -34,11 +35,12 @@
             </span>
           </div>
           <input
-            type="text"
+            type="password"
             class="form-control"
             name="password"
             placeholder="Password"
             required="required"
+            v-model="password"
           />
         </div>
       </div>
@@ -47,9 +49,11 @@
           <input type="checkbox" />
           Remember me
         </label>
-        <a href="#" class="forgot-link ml-5">Forgot Password?</a>
+        <router-link to="/forgotPassword">
+          <a class="forgot-link ml-5">Forgot Password?</a>
+        </router-link>
       </div>
-      <div class="sign-up-button d-flex justify-content-center">
+      <div class="login-form-button d-flex justify-content-center">
         <div class="form-group">
           <button type="submit" class="btn btn-primary btn-lg">Login</button>
         </div>
@@ -63,11 +67,25 @@
 </template>
 
 <script>
+import { Meteor } from "meteor/meteor";
+
 export default {
   name: "Login",
+  data() {
+    return { email: "", password: "" };
+  },
   methods: {
     home() {
       this.$router.push("/");
+    },
+    userLogin() {
+      Meteor.loginWithPassword(this.email, this.password, (err) => {
+        if (err) {
+          console.log("error");
+        } else {
+          this.$router.push("/userAccount");
+        }
+      });
     },
   },
 };
