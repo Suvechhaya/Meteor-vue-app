@@ -7,6 +7,7 @@ import Login from '../imports/ui/components/Login.vue'
 import Signup from '../imports/ui/components/Signup'
 import About from '../imports/ui/components/About'
 import UserAccount from '../imports/ui/components/UserAccount'
+import ChangePassword from '../imports/ui/components/ChangePassword'
 
 Vue.use(VueRouter); const routes = [
 
@@ -19,6 +20,8 @@ Vue.use(VueRouter); const routes = [
     { path: '/about', name: 'about', component: About },
 
     { path: '/userAccount', name: 'userAccount', component: UserAccount },
+
+    { path: '/changePassword', name: 'changePassword', component: ChangePassword },
 ]
 
 const router = new VueRouter({

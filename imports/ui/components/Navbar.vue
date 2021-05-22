@@ -46,6 +46,14 @@
           <ul class="navbar-nav" v-if="currentUser()">
             <li>
               <button
+                @click="changePassword"
+                class="btn btn-outline-light text-white my-2 my-sm-0 mr-2 mb-sm-2"
+              >
+                CHANGE PASSWORD
+              </button>
+            </li>
+            <li>
+              <button
                 @click="logOut()"
                 class="btn btn-outline-light text-white my-2 my-sm-0"
               >
@@ -78,6 +86,9 @@ export default {
           logError(err);
         }
       });
+    },
+    changePassword() {
+      this.$router.push("/changePassword")
     },
     currentUser() {
       return Meteor.user();
