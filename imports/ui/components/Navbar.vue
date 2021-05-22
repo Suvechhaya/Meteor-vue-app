@@ -1,7 +1,9 @@
 <template>
   <div data-spy="scroll" data-target=".navbar" data-offset="50">
     <nav class="navbar navbar-expand-lg tbg-light fixed-top">
-      <a class="navbar-brand text-white logo-name" href="#home"><h4>Mindful Breath</h4></a>
+      <a class="navbar-brand text-white logo-name" href="#home"
+        ><h4>Mindful Breath</h4></a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -18,14 +20,14 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar ml-auto">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" v-if="!currentUser()">
             <li class="nav-item pr-4">
-                <a class="nav-link text-white" href="#home"
-                  >HOME <span class="sr-only">(current)</span></a
-                >
+              <a class="nav-link text-white" href="#home"
+                >HOME <span class="sr-only">(current)</span></a
+              >
             </li>
             <li class="nav-item pr-4">
-                <a class="nav-link text-white" href="#about">ABOUT</a>
+              <a class="nav-link text-white" href="#about">ABOUT</a>
             </li>
             <li class="nav-item pr-4">
               <router-link to="/login">
@@ -41,6 +43,16 @@
               </button>
             </li>
           </ul>
+          <ul class="navbar-nav" v-if="currentUser()">
+            <li>
+              <button
+                @click="logOut()"
+                class="btn btn-outline-light text-white my-2 my-sm-0"
+              >
+                LOG OUT
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -48,6 +60,8 @@
 </template>
 
 <script>
+import { Meteor } from "meteor/meteor";
+
 export default {
   name: "Navbar",
 
@@ -63,6 +77,14 @@ export default {
         ) {
           logError(err);
         }
+      });
+    },
+    currentUser() {
+      return Meteor.user();
+    },
+    logOut() {
+      Meteor.logout(() => {
+        this.$router.push("/");
       });
     },
   },
