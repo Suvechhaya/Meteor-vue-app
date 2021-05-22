@@ -29,5 +29,6 @@ body {
   --blue-d: rgb(16, 65, 121);
   --blue-md: rgb(19, 78, 148);
   --blue-trans: rgba(11, 57, 84, 0.4);
+  --blue-trans-light: rgba(11, 57, 84, 0.04);
 }
 </style>
