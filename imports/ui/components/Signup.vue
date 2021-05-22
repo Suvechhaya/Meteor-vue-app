@@ -1,6 +1,6 @@
 <template>
   <div class="signup-form">
-    <form @submit.prevent="userRegister">
+    <form @submit.prevent="registerUser">
       <div class="close-btn mb-4">
         <button @click="home" type="button" class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -19,7 +19,7 @@
             </span>
           </div>
           <input
-            type="text"
+            type="email"
             class="form-control"
             name="email"
             placeholder="Email"
@@ -44,7 +44,7 @@
             v-model="password"
           />
         </div>
-        <div v-if="passwordLengthCheck()" class="error-msg p-1">
+        <div v-if="!checkPasswordLength()" class="error-msg p-1">
           <span>Password must be at least 8 characters!</span>
         </div>
       </div>
@@ -65,7 +65,7 @@
             v-model="repassword"
           />
         </div>
-        <div v-if="passwordConfirm()" class="error-msg p-1">
+        <div v-if="!confirmPassword()" class="error-msg p-1">
           <span>Password mismatched!</span>
         </div>
       </div>
@@ -94,33 +94,34 @@ export default {
     home() {
       this.$router.push("/");
     },
-    passwordLengthCheck() {
-      if (this.password) {
-        if (this.password.length >= 8) {
-          passwordLength = true;
-          return false;
-        }
-        return true;
-      } else passwordLength = false;
+    checkPasswordLength() {
+      if (this.password && this.password.length < 8) {
+        return false;
+      }
+      return true;
     },
-    passwordConfirm() {
-      if (this.repassword) {
-        if (this.password === this.repassword) {
-          passwordMatch = true;
-          return false;
-        }
+    confirmPassword() {
+      if (this.repassword && this.password !== this.repassword) {
+        return false;
+      }
+      return true;
+    },
+    isValid() {
+      if (this.checkPasswordLength() && this.confirmPassword()) {
         return true;
       }
+      return false;
     },
-    userRegister() {
+    registerUser() {
       const doc = { email: this.email, password: this.password };
-      // if (this.passwordLength && this.passwordMatch) {
+      if (this.isValid()) {
         Accounts.createUser(doc, (err) => {
           if (!err) {
             alert("Sign up successful");
             this.$router.push("/login");
           } else alert("Sign up unsuccessful");
         });
+      }
     },
   },
 };
