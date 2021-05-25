@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <form @submit.prevent="userLogin">
+    <form @submit.prevent="loginUser">
       <div class="close-btn mb-4">
         <button @click="home" type="button" class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -78,7 +78,7 @@ export default {
     home() {
       this.$router.push("/");
     },
-    userLogin() {
+    loginUser() {
       Meteor.loginWithPassword(this.email, this.password, (err) => {
         if (err) {
           console.log("error");
