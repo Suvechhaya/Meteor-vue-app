@@ -84,6 +84,7 @@
 
 <script>
 import { Accounts } from "meteor/accounts-base";
+import { Meteor } from "meteor/meteor";
 
 export default {
   name: "Signup",
@@ -118,7 +119,7 @@ export default {
         Accounts.createUser(doc, (err) => {
           if (!err) {
             alert("Sign up successful");
-            this.$router.push("/login");
+            this.$router.push("/userAccount");
           } else alert("Sign up unsuccessful");
         });
       }
