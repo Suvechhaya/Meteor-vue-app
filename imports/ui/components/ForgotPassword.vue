@@ -1,6 +1,6 @@
 <template>
   <div class="forgot-password-form">
-    <form @submit.prevent="sendResetEmail">
+    <form @submit.prevent="sendEmail">
       <div class="close-btn mb-4">
         <button @click="login" type="button" class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -30,7 +30,6 @@
       <div class="sign-up-button d-flex justify-content-center">
         <div class="form-group">
           <button
-            @click="sendEmail"
             type="submit"
             class="btn btn-primary btn-lg"
           >
@@ -56,12 +55,12 @@ export default {
       this.$router.push("/login");
     },
     async sendEmail() {
-      console.log('send email method is called')
       try {
         if (!this.email) return;
-        await Meteor.call('Accounts.sendResetEmail', this.email);
+        await Meteor.call("Accounts.sendResetEmail", this.email);
+        alert("Reset Email sent.");
       } catch (e) {
-        this.$error(e);
+        console.log(e);
       }
     },
   },

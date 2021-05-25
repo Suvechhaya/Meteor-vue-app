@@ -1,6 +1,6 @@
 <template>
   <div class="reset-password-form">
-    <form @submit.prevent="resetPassword()">
+    <form @submit.prevent="resetUserPassword()">
       <div class="close-btn mb-4">
         <button @click="home" type="button" class="close" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -26,7 +26,7 @@
             v-model="newPassword"
           />
         </div>
-        <div v-if="passwordLengthCheck()" class="error-msg p-1">
+        <div v-if="!checkPasswordLength()" class="error-msg p-1">
           <span>Password must be at least 8 characters!</span>
         </div>
       </div>
@@ -51,44 +51,26 @@ export default {
     home() {
       this.$router.push("/");
     },
-    passwordLengthCheck() {
-      if (this.newPassword) {
-        if (this.newPassword.length >= 8) {
-          passwordLength = true;
-          return false;
-        }
-        return true;
-      } else passwordLength = false;
+    checkPasswordLength() {
+      if (this.newPassword && this.newPassword.length < 8) {
+        return false;
+      }
+      return true;
     },
-    resetPassword() {
-      Accounts.resetPassword(this.newPassword, (err) => {
-        // if (!token instanceof String) {
-        //   return reportError(
-        //     new Meteor.Error(400, "Token must be a string"),
-        //     callback
-        //   );
-        // }
-
-        // if (!newPassword instanceof String) {
-        //   return reportError(
-        //     new Meteor.Error(400, "Password must be a string"),
-        //     callback
-        //   );
-        // }
-
-        // if (!newPassword) {
-        //   return reportError(
-        //     new Meteor.Error(400, "Password may not be empty"),
-        //     callback
-        //   );
-        // }
-
-        // Accounts.callLoginMethod({
-        //   methodName: "resetPassword",
-        //   methodArguments: [token, Accounts._hashPassword(newPassword)],
-        //   userCallback: callback,
-        // });
-      });
+    resetUserPassword() {
+      if (this.checkPasswordLength()) {
+        Accounts.resetPassword(
+          this.$route.params.token,
+          this.newPassword,
+          (error) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("no error");
+            }
+          }
+        );
+      }
     },
   },
 };
