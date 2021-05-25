@@ -42,7 +42,7 @@ export default {
     return {
       image: {
         backgroundImage:
-          "url(https://www.10wallpaper.com/wallpaper/1366x768/1811/Austria_Plansee_Lake_HD_Nature_Scenery_Photo_1366x768.jpg)",
+          "url(https://i.pinimg.com/originals/ec/e1/21/ece121de04b1ac38117c2aea1c9b51d0.jpg)",
       },
     };
   },
